@@ -1,5 +1,8 @@
 ---
 
-- name: Ubuntu desktop setup playbook
+- name: Ubuntu workstation playbook
   hosts: localhost
+  vars:
+    aptcachetime: 3600
   roles:
+    - {role: locale, become: true}

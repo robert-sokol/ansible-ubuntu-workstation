@@ -1,6 +1,6 @@
 ---
 
-- name: Generate locale
+- name: Generate locales
   command: locale-gen
 
 - name: Update timezone data
