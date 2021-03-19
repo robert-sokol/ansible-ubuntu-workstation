@@ -1,0 +1,5 @@
+---
+
+- name: Ubuntu desktop setup playbook
+  hosts: localhost
+  roles:
