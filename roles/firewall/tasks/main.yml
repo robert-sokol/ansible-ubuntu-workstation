@@ -1,0 +1,27 @@
+---
+- name: Make sure iptables are installed.
+  action: >
+    apt pkg=iptables state=latest update_cache=yes
+    cache_valid_time={{ aptcachetime }}
+
+- name: Get existing iptables rules.
+  command: iptables -nL
+  changed_when: false
+  register: iptables_rules
+
+- name: Create "{{custom_reject}}" chain.
+  command: iptables -N "{{custom_reject}}"
+  when: custom_reject not in iptables_rules.stdout
+
+- name: Create "{{custom_input}}" chain.
+  command: iptables -N "{{custom_input}}"
+  when: custom_input not in iptables_rules.stdout
+
+- name: Create "{{custom_rules}}" chain.
+  command: iptables -N "{{custom_rules}}"
+  when: custom_rules not in iptables_rules.stdout
+
+- iptables:
+    chain: INPUT
+    source: 0.0.0.0
+    jump: "{{custom_reject}}"
