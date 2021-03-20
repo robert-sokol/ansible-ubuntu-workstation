@@ -6,4 +6,4 @@
     aptcachetime: 3600
   roles:
     - {role: locale, become: true}
-    - {role: firewall, become: true}
+    - {role: firewall-ufw, become: true}

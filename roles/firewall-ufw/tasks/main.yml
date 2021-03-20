@@ -1,6 +1,29 @@
 ---
 
 - name: Enable UFW
-  community.general.ufw:
+  ufw:
     state: enabled
-    policy: allow
+
+- name: Allow loopback traffic.
+  ufw:
+    interface: lo
+    direction: in
+    rule: allow
+
+- name: Allow ssh traffic.
+  ufw:
+    proto: tcp
+    port: '22'
+    rule: allow
+
+- name: Allow http traffic.
+  ufw:
+    proto: tcp
+    port: '80'
+    rule: allow
+
+- name: Allow https traffic.
+  ufw:
+    proto: tcp
+    port: '443'
+    rule: allow
