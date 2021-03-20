@@ -15,7 +15,6 @@
   apt:
     pkg:
       - curl
-      - net-tools
       - wget
       - atop
       - net-tools
