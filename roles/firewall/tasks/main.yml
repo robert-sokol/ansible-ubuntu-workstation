@@ -21,7 +21,24 @@
   command: iptables -N "{{custom_rules}}"
   when: custom_rules not in iptables_rules.stdout
 
-- iptables:
+- name: Flush existing firewall rules.
+  iptables:
+    flush: true
+
+- name: Create "{{custom_rules}}" jump.
+  iptables:
+    chain: INPUT
+    source: 0.0.0.0
+    jump: "{{custom_rules}}"
+
+- name: Create "{{custom_input}}" jump.
+  iptables:
+    chain: INPUT
+    source: 0.0.0.0
+    jump: "{{custom_input}}"
+
+- name: Create "{{custom_reject}}" jump.
+  iptables:
     chain: INPUT
     source: 0.0.0.0
     jump: "{{custom_reject}}"
