@@ -42,3 +42,54 @@
     chain: INPUT
     source: 0.0.0.0
     jump: "{{custom_reject}}"
+
+- name: Allow established connections.
+  iptables:
+    chain: "{{custom_input}}"
+    ctstate: ESTABLISHED,RELATED
+    jump: ACCEPT
+
+- name: Allow loopback traffic.
+  iptables:
+    chain: "{{custom_input}}"
+    in_interface: lo
+    jump: ACCEPT
+
+- name: Allow icmp traffic.
+  iptables:
+    chain: "{{custom_input}}"
+    protocol: icmp
+    jump: ACCEPT
+
+- name: Allow ssh traffic.
+  iptables:
+    chain: "{{custom_input}}"
+    destination_port: "22"
+    protocol: tcp
+    jump: ACCEPT
+
+- name: Allow http traffic.
+  iptables:
+    chain: "{{custom_input}}"
+    destination_port: "80"
+    protocol: tcp
+    jump: ACCEPT
+
+- name: Allow https traffic.
+  iptables:
+    chain: "{{custom_input}}"
+    destination_port: "443"
+    protocol: tcp
+    jump: ACCEPT
+
+- name: Deny all other tcp traffic.
+  iptables:
+    chain: "{{custom_reject}}"
+    protocol: tcp
+    reject_with: tcp-reset
+
+- name: Deny all other udp traffic.
+  iptables:
+    chain: "{{custom_reject}}"
+    protocol: udp
+    reject_with: icmp-port-unreachable
