@@ -1,0 +1,8 @@
+---
+
+- name: Install default OpenJDK
+  apt:
+    pkg:
+      - default-jdk
+      - default-jre-headless
+    state: latest

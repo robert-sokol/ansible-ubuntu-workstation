@@ -9,3 +9,4 @@
     - {role: firewall-ufw, become: true}
     - {role: common, become: true}
     - {role: ssh, become: true}
+    - {role: java-openjdk, become: true}
