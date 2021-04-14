@@ -32,6 +32,11 @@
       - screen
       - tmux
       - rar
+      - yamllint
+      - pylint
+      - shellcheck
+      - jq
+      - smartmontools
     state: latest
 
 - name: Upgrade installed pkgs.

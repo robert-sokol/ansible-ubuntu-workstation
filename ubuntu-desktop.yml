@@ -8,3 +8,4 @@
     - {role: locale, become: true}
     - {role: firewall-ufw, become: true}
     - {role: common, become: true}
+    - {role: ssh, become: true}
